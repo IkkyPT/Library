@@ -17,15 +17,30 @@
                     <i class="fa-solid fa-book fa-2x"></i>
                     <h2>Library</h2>
                 </div>
-                <button class="addBtn"><i class="fa-solid fa-plus"></i></button>
+                <button class="addBtn" onclick="displayInput()"><i class="fa-solid fa-plus"></i></button>
             </div>
         </header>
         <section>
+            <div class="user-input"></div>
             <div class="container">
-                <div class="book-grid">
-                    
-                </div>
-                
+                <div class="book-grid"></div>       
+            </div>
+            <div class="input-user">
+                <form action="#">
+                        <div class="form-cell">
+                            <label for="book_name">BOOK NAME:</label>
+                            <input type="text" name="book_name" id="book_name" maxlength="32" required>
+                        </div>
+                        <div class="form-cell">
+                            <label for="author_name">AUTHOR NAME:</label>
+                            <input type="text" name="author_name" id="author_name" maxlength="32" required>
+                        </div>
+                        <div class="form-cell">
+                            <label for="num_pages">PAGES:</label>
+                            <input type="text" id="num_pages" name="num_pages" pattern="[0-9]"  minlength="1" maxlength="4" required>
+                        </div>
+                        <button type="submit" class="crt_book" onclick="createBook()">Create Book</button>
+                </form>
             </div>
         </section>
         <footer>

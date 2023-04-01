@@ -1,3 +1,8 @@
+const inputUser = document.querySelector('.input-user');
+const createBookBtn = document.querySelector('crt_book');
+let inputBarOn = false;
+let currBook = 0;
+
 let myLibrary = [];
 
 function book(name, author, pages){
@@ -6,19 +11,15 @@ function book(name, author, pages){
     this.pages = pages
 }
 
-const book1 = new book('steve', 'X', '156');
-const book2 = new book('jose', 'Z', '123')
-
 function addBookToLibrary(book){
+    // Push current book to myLibrary array
     myLibrary.push(book);
 }
 
 function displayBooks(){
     const libraryContainer = document.querySelector('.book-grid');
-    // clear existing content
-    libraryContainer.innerHTML = '';
 
-    for(let i = 0; i < myLibrary.length; i++){
+    for(let i = currBook; i < myLibrary.length; i++){
         const book = myLibrary[i];
 
         //create a new book card
@@ -62,7 +63,39 @@ function displayBooks(){
     }
 }
 
-addBookToLibrary(book1);
-addBookToLibrary(book2);
-displayBooks();
-console.log(myLibrary)
+function displayInput(){
+    inputBarOn = true;
+    if(inputBarOn == true){
+        inputUser.classList.toggle('show');
+    }
+    else {
+        return 0;
+    }
+}
+
+function createBook() {
+    event.preventDefault(); // Prevent the form from submitting
+
+    // get the values from the form inputs
+    const nameInput = document.querySelector('#book_name');
+    const authorInput = document.querySelector('#author_name');
+    const pagesInput = document.querySelector('#num_pages');
+
+    // create a new book object with the input values
+    const newBook = new book(nameInput.value, authorInput.value, pagesInput.value);
+
+    // add the new book to the library and display it
+    addBookToLibrary(newBook);
+    displayBooks();
+
+    // reset the form inputs
+    nameInput.value = '';
+    authorInput.value = '';
+    pagesInput.value = '';
+
+    // hide the input form
+    inputUser.classList.remove('show');
+
+    // increment currBook variable so it display only the new book(s)
+    currBook ++;
+};

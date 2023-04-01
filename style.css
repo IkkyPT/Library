@@ -88,6 +88,7 @@ section {
 .button-group > button {
     padding: 10px 30px;
     border: none;
+    border-radius: 10px;
     box-shadow: 1px 1px 5px 1px #00000060;
 }
 
@@ -99,4 +100,22 @@ footer {
     font-size: 25px;
     box-shadow: 0 1px 20px 1px #00000060;
     font-weight: 700;
+}
+
+.input-user {
+    position: fixed;
+    top: 4rem;
+    right: -400px;
+    bottom: 5rem;
+    width: 100vw;
+    max-width: 400px;
+    background-color: rgba(0, 0, 0, 0.616);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.input-user.show {
+    right: 0;
 }
