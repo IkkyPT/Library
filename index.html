@@ -26,7 +26,7 @@
                 <div class="book-grid"></div>       
             </div>
             <div class="input-user">
-                <form action="#">
+                <form action="#" id="form">
                     <fieldset>
                         <div class="form-cell">
                             <label for="book_name">BOOK NAME:</label>
@@ -42,9 +42,9 @@
                     </fieldset>
                     <div class="form-cell-read">
                         <label for="is_read">READ?</label>
-                        <input type="checkbox" id="is_read" name="is_read" required>
+                        <input type="checkbox" id="is_read" name="is_read">
                     </div>
-                    <button type="submit" class="crt_book" onclick="createBook()">Create Book</button>
+                    <button class="crt_book" onclick="createBook()">Create Book</button>
                 </form>
             </div>
         </section>
