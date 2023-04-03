@@ -1,16 +1,15 @@
 const inputUser = document.querySelector('.input-user');
 const createBookBtn = document.querySelector('.crt_book');
+const readBtn = document.querySelector('.btn-read');
 let inputBarOn = false;
 let currBook = 0;
 let myLibrary = [];
 
+// show and hide the form once toggle
 function displayInput(){
     inputBarOn = true;
     if(inputBarOn == true){
         inputUser.classList.toggle('show');
-    }
-    else {
-        return 0;
     }
 }
 
@@ -18,18 +17,29 @@ function book(name, author, pages){
     this.name = name
     this.author = author
     this.pages = pages
+    this.read = false; // initialize the read status to false
+}
+
+book.prototype.toggleRead = function() {
+    this.read = !this.read; // toggle the read status between true and false
 }
 
 function createBook() {
-    event.preventDefault(); // Prevent the form from submitting
+    // Prevent the form from submitting
 
     // get the values from the form inputs
     const nameInput = document.querySelector('#book_name');
     const authorInput = document.querySelector('#author_name');
     const pagesInput = document.querySelector('#num_pages');
+    const readInput = document.querySelector('#is_read');
 
     // create a new book object with the input values
-    const newBook = new book(nameInput.value, authorInput.value, pagesInput.value);
+    const newBook = new book(nameInput.value, authorInput.value, pagesInput.value, readInput.value);
+
+    // Update the read status based of the checkbox
+    if (readInput.checked) {
+        newBook.toggleRead();
+    }
 
     // add the new book to the library and display it
     addBookToLibrary(newBook);
@@ -39,6 +49,7 @@ function createBook() {
     nameInput.value = '';
     authorInput.value = '';
     pagesInput.value = '';
+    readInput.value = ''
 
     // hide the input form
     inputUser.classList.remove('show');
@@ -85,8 +96,18 @@ function displayBooks(){
 
         const readButton = document.createElement('button');
         readButton.classList.add('btn-read');
+        readButton.setAttribute('onclick','isRead()');
         readButton.textContent = 'Read';
         buttonGroup.appendChild(readButton);
+
+        // change button properties if the book is read
+        if(book.read){
+            readButton.style.backgroundColor = 'green';
+        }
+        else{
+            readButton.style.backgroundColor = 'red';
+            readButton.textContent = 'Not read';
+        }
 
         const deleteButton = document.createElement('button');
         deleteButton.classList.add('btn-delete');
@@ -105,13 +126,10 @@ function deleteCard() {
     const deleteBtn = event.target; //Refer to the specific delete button that was clicked
     const card = deleteBtn.closest('.book-card');
     const index = card.dataset.card;
-
-    console.log(myLibrary);
   
     // remove the book from the myLibrary array
     myLibrary.splice(index, 1);
 
-  
     // remove the card from the DOM
     card.remove();
 
@@ -124,6 +142,23 @@ function deleteCard() {
     
     // update currBook to reflect the new number of books displayed
     currBook = myLibrary.length;
-
-    console.log(myLibrary);
   }
+
+function isRead() {
+    const readBtn = event.target; // Get the specific button that was clicked
+    const card = readBtn.closest('.book-card');
+    const index = card.dataset.card;
+    const book = myLibrary[index];
+    
+    // Toggle the read status of the book object
+    book.toggleRead();
+    
+    // Change the background color of the button based on the updated read status
+    if (book.read) {
+        readBtn.style.backgroundColor = 'green';
+        readBtn.textContent = 'Read';
+    } else {
+        readBtn.style.backgroundColor = 'red';
+        readBtn.textContent = 'Not read';
+    }
+}

@@ -27,6 +27,7 @@
             </div>
             <div class="input-user">
                 <form action="#">
+                    <fieldset>
                         <div class="form-cell">
                             <label for="book_name">BOOK NAME:</label>
                             <input type="text" name="book_name" id="book_name" maxlength="32" required>
@@ -37,9 +38,13 @@
                         </div>
                         <div class="form-cell">
                             <label for="num_pages">PAGES:</label>
-                            <input type="text" id="num_pages" name="num_pages" pattern="[0-9]"  minlength="1" maxlength="4" required>
-                        </div>
-                        <button type="submit" class="crt_book" onclick="createBook()">Create Book</button>
+                            <input type="text" id="num_pages" name="num_pages" pattern="\d+"  minlength="1" maxlength="4" required>
+                    </fieldset>
+                    <div class="form-cell-read">
+                        <label for="is_read">READ?</label>
+                        <input type="checkbox" id="is_read" name="is_read" required>
+                    </div>
+                    <button type="submit" class="crt_book" onclick="createBook()">Create Book</button>
                 </form>
             </div>
         </section>

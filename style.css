@@ -121,6 +121,42 @@ footer {
     transition: all 0.3s ease-in-out;
 }
 
+
 .input-user.show {
     right: 0;
+}
+
+.form-cell {
+    display: flex;
+    flex-direction: column;
+}
+
+fieldset {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+input {
+    margin-bottom: 15px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    box-shadow: 0 1px 20px 1px #ffffff4b;
+}
+
+input#is_read {
+    padding: 10px;
+}
+
+label {
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.crt_book {
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background: #ffffff;
+    box-shadow: 0 1px 20px 1px #ffffff4b;
 }
