@@ -25,7 +25,7 @@ book.prototype.toggleRead = function() {
 }
 
 function createBook() {
-    // Prevent the form from submitting
+    event.preventDefault(); // Prevent the form from submitting
 
     // get the values from the form inputs
     const nameInput = document.querySelector('#book_name');
@@ -42,20 +42,24 @@ function createBook() {
     }
 
     // add the new book to the library and display it
-    addBookToLibrary(newBook);
-    displayBooks();
+    if(nameInput.value === "" || authorInput.value === "" || pagesInput.value === "") {
+        alert('Please fill out the form!');
+        // reset the form inputs
+        resetValue(nameInput, authorInput, pagesInput, readInput);
+        console.log(nameInput.value)
+        console.log(authorInput.value)
+    }
+    else {
+        addBookToLibrary(newBook);
+        displayBooks();
+        resetValue(nameInput, authorInput, pagesInput, readInput);
 
-    // reset the form inputs
-    nameInput.value = '';
-    authorInput.value = '';
-    pagesInput.value = '';
-    readInput.value = ''
+        // hide the input form
+        inputUser.classList.remove('show');
 
-    // hide the input form
-    inputUser.classList.remove('show');
-
-    // increment currBook variable so it display only the new book(s)
-    currBook ++;
+        // increment currBook variable so it display only the new book(s)
+        currBook ++;
+        }
 };
 
 function addBookToLibrary(book){
@@ -161,4 +165,11 @@ function isRead() {
         readBtn.style.backgroundColor = 'red';
         readBtn.textContent = 'Not read';
     }
+}
+
+function resetValue(name, author, pages, input) {
+    name.value = '';
+    author.value = '';
+    pages.value = '';
+    input.value = '';
 }
